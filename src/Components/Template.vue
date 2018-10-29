@@ -7,6 +7,9 @@
 <script>
 export default {
   name: 'Template',
+  mounted() {
+    this.$emit('update:template', this.template)
+  },
   data() {
     return {
       template: `

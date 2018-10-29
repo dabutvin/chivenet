@@ -11,12 +11,12 @@ export default {
     return {
       coordinates: [
         'npm/npmjs/-/lodash/4.17.11',
-        'npm/npmjs/-/request/2.88.0',
-        'npm/npmjs/@angular/core/6.0.1',
         'nuget/nuget/-/newtonsoft.json/11.0.2',
-        'git/github/facebook/react/v15.6.1'
       ]
     }
+  },
+  mounted() {
+    this.$emit('update:coordinates', this.coordinates)
   },
   computed: {
     text: {
