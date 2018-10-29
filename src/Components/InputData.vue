@@ -1,6 +1,6 @@
 <template>
   <div>
-    <textarea v-model="text" contenteditable @input="$emit('update:coordinates', coordinates)"></textarea>
+    <textarea v-model="text" @input="$emit('update:coordinates', coordinates)"></textarea>
   </div>
 </template>
 
@@ -20,16 +20,25 @@ export default {
   },
   computed: {
     text: {
-      get: function () {
+      get: function() {
         return JSON.stringify(this.coordinates)
       },
-      set: function (val) {
+      set: function(val) {
         this.coordinates = JSON.parse(val)
       }
+    }
+  },
+  methods: {
+    onJsonChange(value) {
+      this.$emit('update:coordinates', this.coordinates)
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+textarea {
+  height: 45vh;
+  width: 100%;
+}
 </style>

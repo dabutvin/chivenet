@@ -57,5 +57,9 @@ var packageData = JSON.stringify({
 })
 </script>
 
-<style>
+<style scoped>
+iframe {
+  height: 100vh;
+  width: 100%;
+}
 </style>
