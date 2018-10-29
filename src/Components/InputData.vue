@@ -1,19 +1,33 @@
 <template>
-  <div>
-    <textarea v-model="text" @input="$emit('update:coordinates', coordinates)"></textarea>
+  <div class="input-container">
+    <codemirror v-model="text" :options="cmOptions" @input="$emit('update:coordinates', coordinates)"></codemirror>
   </div>
 </template>
 
 <script>
+import {codemirror} from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
+
 export default {
   name: 'InputData',
   data() {
     return {
       coordinates: [
         'npm/npmjs/-/lodash/4.17.11',
-        'nuget/nuget/-/newtonsoft.json/11.0.2',
-      ]
+        'nuget/nuget/-/newtonsoft.json/11.0.2'
+      ],
+      cmOptions: {
+        tabSize: 2,
+        mode: 'text/javascript',
+        theme: 'material',
+        lineNumbers: true,
+        line: true
+      }
     }
+  },
+  components: {
+    codemirror
   },
   mounted() {
     this.$emit('update:coordinates', this.coordinates)
@@ -21,24 +35,23 @@ export default {
   computed: {
     text: {
       get: function() {
-        return JSON.stringify(this.coordinates)
+        return JSON.stringify(this.coordinates, null, 2)
       },
       set: function(val) {
-        this.coordinates = JSON.parse(val)
+        try {
+          this.coordinates = JSON.parse(val)
+        } catch (e) {
+          // ignore }
+        }
       }
-    }
-  },
-  methods: {
-    onJsonChange(value) {
-      this.$emit('update:coordinates', this.coordinates)
     }
   }
 }
 </script>
 
 <style scoped>
-textarea {
-  height: 45vh;
-  width: 100%;
+.input-container {
+  height: 90%;
+  margin: 15px 15px 0 15px;
 }
 </style>

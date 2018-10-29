@@ -38,6 +38,12 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  overflow: hidden;
+  background: #dedede;
+}
+
 body,
 h1,
 h2,
@@ -65,7 +71,6 @@ img {
 
 .left {
   width: 40%;
-  background: blue;
   float: left;
 }
 
@@ -79,7 +84,6 @@ img {
 
 .right {
   width: 60%;
-  background: green;
   height: 100vh;
   float: right;
 }

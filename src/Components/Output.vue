@@ -17,7 +17,7 @@ export default {
     rendering: async function() {
       var vm = this
       try {
-        var inputData = JSON.stringify({ coordinates: vm.coordinates })
+        var inputData = JSON.stringify({coordinates: vm.coordinates})
         const source = new ClearlyDefinedSource(inputData)
         var chive = new Chive(new Renderer(vm.template))
         await chive.read(source)
@@ -59,7 +59,9 @@ var packageData = JSON.stringify({
 
 <style scoped>
 iframe {
-  height: 100vh;
-  width: 100%;
+  height: 95vh;
+  margin: 15px;
+  width: 95%;
+  border-radius: 15px;
 }
 </style>

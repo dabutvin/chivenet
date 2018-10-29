@@ -1,14 +1,21 @@
 <template>
-  <div>
-    <textarea v-model="template" @input="$emit('update:template', template)"></textarea>
+  <div class="template-container">
+    <codemirror v-model="template" :options="cmOptions" @input="$emit('update:template', template)"></codemirror>
   </div>
 </template>
 
 <script>
+import {codemirror} from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
+
 export default {
   name: 'Template',
   mounted() {
     this.$emit('update:template', this.template)
+  },
+  components: {
+    codemirror
   },
   data() {
     return {
@@ -39,11 +46,28 @@ export default {
       </ol>
       <pre>{{text}}</pre>
     </li>
-    {{/buckets}}`
+    {{/buckets}}`,
+      cmOptions: {
+        tabSize: 2,
+        mode: 'text/javascript',
+        theme: 'material',
+        lineNumbers: true,
+        line: true
+      }
     }
   }
 }
 </script>
 
 <style>
+.CodeMirror,
+.vue-codemirror {
+  height: 100%;
+  border-radius: 15px;
+}
+
+.template-container {
+  height: 90%;
+  margin: 0 15px 15px 15px;
+}
 </style>
