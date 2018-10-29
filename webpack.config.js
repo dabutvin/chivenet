@@ -26,7 +26,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js',
+      handlebars: 'handlebars/dist/handlebars.min.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
