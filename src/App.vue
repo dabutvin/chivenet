@@ -1,89 +1,86 @@
 <template>
   <div>
-    <h1>ChiveNet!</h1>
+    <div class="left">
+      <div class="input">
+        <InputData v-bind:coordinates.sync="coordinates"></InputData>
+      </div>
+      <div class="template">
+        <Template v-bind:template.sync="template"></Template>
+      </div>
+    </div>
+    <div class="right">
+      <div class="output">
+        <Output v-bind:coordinates="coordinates" v-bind:template="template"></Output>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Chive from 'tiny-attribution-generator'
-import JSONSource from 'tiny-attribution-generator/lib/inputs/json'
-import ClearlyDefinedSource from 'tiny-attribution-generator/lib/inputs/clearlydefined'
-import Renderer from 'tiny-attribution-generator/lib/outputs/template'
+import InputData from './Components/InputData'
+import Template from './Components/Template'
+import Output from './Components/Output'
+
 export default {
   name: 'app',
-  mounted() {
-    //var source = new JSONSource(packageData);
-
-  // see https://docs.clearlydefined.io/using-data
-    const packageData = JSON.stringify({
-      coordinates: [
-        'npm/npmjs/-/lodash/4.17.11',
-        'npm/npmjs/-/request/2.88.0',
-        'npm/npmjs/@angular/core/6.0.1',
-        'nuget/nuget/-/newtonsoft.json/11.0.2',
-        'git/github/facebook/react/v15.6.1',
-      ],
-    });
-
-    const source = new ClearlyDefinedSource(packageData);
-
-    var chive = new Chive(new Renderer(template))
-    chive.read(source).then(() => {
-      console.log(chive.build())
-    })
+  components: {
+    InputData,
+    Template,
+    Output
+  },
+  data() {
+    return {
+      coordinates: [],
+      template: ''
+    }
   }
 }
-
-var packageData = JSON.stringify({
-  packages: [
-    {
-      name: 'aabb',
-      version: '1.0.4',
-      license: 'MIT',
-      website: 'https://github.com/testpackage/aabb',
-      copyrights: ['Copyright (c) Test copyright'],
-    },
-    {
-      name: 'bbcc',
-      version: '1.1.1',
-      license: 'ISC',
-      website: 'https://github.com/testpackage/bbcc',
-    },
-    {
-      name: 'ccdd',
-      version: '1.3.4',
-      license: 'MIT',
-      website: 'https://github.com/testpackage/ccdd',
-      copyrights: ['Copyright the holder', 'Copyright the other holder'],
-    },
-  ],
-});
-var template = `
-<h1>OSS Attribution</h1>
-  <ol>
-    {{#buckets}}
-    <li>
-      <h2>{{name}}</h2>
-      <ol>
-        {{#packages}}
-        <li>
-          <details>
-            <summary>{{name}} {{version}}</summary>
-            {{#if website}}
-            <p><a href="{{website}}">{{website}}</a></p>
-            {{/if}}
-            {{#if copyrights}}
-            <ul>
-              {{#copyrights}}
-              <li>{{this}}</li>
-              {{/copyrights}}
-            </ul>
-            {{/if}}
-          </details>
-        </li>
-        {{/packages}}
-      </ol>
-      <pre>{{text}}</pre>
-    </li>
-    {{/buckets}}`
 </script>
+
+<style>
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.left {
+  width: 40%;
+  background: blue;
+  float: left;
+}
+
+.left .input {
+  height: 50vh;
+}
+
+.left .template {
+  height: 50vh;
+}
+
+.right {
+  width: 60%;
+  background: green;
+  height: 100vh;
+  float: right;
+}
+</style>
